@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Grid, Form, Divider, Input, Label, Table } from 'semantic-ui-react';
+import { Container, Grid, Form, Divider, Input, Label, Table, Button } from 'semantic-ui-react';
 import './App.css';
 
 class App extends Component {
@@ -9,8 +9,8 @@ class App extends Component {
             amount: '', 
             termYear: '', 
             termMonth: '',
-            rateInt: 0, 
-            rateDecimal: 0
+            rateInt: '', 
+            rateDecimal: ''
         };
     }
 
@@ -21,13 +21,14 @@ class App extends Component {
             amount: '', 
             termYear: '', 
             termMonth: '',
-            rateInt: 0, 
-            rateDecimal: 0
+            rateInt: '', 
+            rateDecimal: ''
         });
     }
 
     calculateMonthlyPayment = () => {
-        if (this.state.amount === '' || this.state.termYear === '' || this.state.termMonth === '') {
+        if (this.state.amount === '' || this.state.termYear === '' || this.state.termMonth === ''
+        || this.state.rateInt === '' || this.state.rateDecimal === '') {
             return '';
         }
 
@@ -100,17 +101,16 @@ class App extends Component {
                             <Form.Group inline className="App-group">
                                 <label>Loan Rate</label>
                                 <Form.Field >
-                                    <Input type='text' labelPosition='right' name="rateInt" value={this.state.rateInt} onChange={this.handleChange} />
+                                    <Input type='text' labelPosition='right' placeholder="Rate..." name="rateInt" value={this.state.rateInt} onChange={this.handleChange} />
                                 </Form.Field>
                                 <Form.Field>
-                                    <Input labelPosition='right' type='text' name="rateDecimal" value={this.state.rateDecimal} onChange={this.handleChange}>
+                                    <Input labelPosition='right' placeholder="Rate..." type='text' name="rateDecimal" value={this.state.rateDecimal} onChange={this.handleChange}>
                                         <Label className="App-label">.</Label>
                                         <input/>
                                         <Label>%</Label>
                                     </Input>
                                 </Form.Field>
-                            </Form.Group>
-                            <Form.Button onClick={this.handleReset}>Reset</Form.Button>
+                            </Form.Group>                           
                         </Form>
                     </Grid.Column>
                     <Grid.Column>                        
@@ -136,6 +136,7 @@ class App extends Component {
                                 </Table.Row>
                             </Table.Body>
                         </Table>
+                        <Button onClick={this.handleReset}>Clear Form</Button>
                     </Grid.Column>                
                 </Grid>
             </Container>              
